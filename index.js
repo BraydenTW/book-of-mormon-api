@@ -25,6 +25,15 @@ const books = [
   "moroni",
 ];
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 app.get("/", (req, res) =>
   res.json({
     message: "Welcome to the ultimate Book of Mormon API! Instructions are here: https://github.com/BraydenTW/book-of-mormon-api/",
