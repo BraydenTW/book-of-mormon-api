@@ -31,9 +31,7 @@ app.get("/random", (req, res) => {
   const verseIndex = randomIndex(
     data.books[bookIndex].chapters[chapterIndex].verses
   );
-  res.json({
-    ref: data.books[bookIndex].chapters[chapterIndex].verses[verseIndex],
-  });
+  res.json(data.books[bookIndex].chapters[chapterIndex].verses[verseIndex]);
 });
 
 app.get("/random/:book", (req, res) => {
@@ -42,42 +40,24 @@ app.get("/random/:book", (req, res) => {
   const verseIndex = randomIndex(
     data.books[bookIndex].chapters[chapterIndex].verses
   );
-  res.json({
-    ref: data.books[bookIndex].chapters[chapterIndex].verses[verseIndex],
-  });
+  res.json(data.books[bookIndex].chapters[chapterIndex].verses[verseIndex]);
 });
 
 app.get("/random/:book/:chapter", (req, res) => {
   const bookIndex = books.indexOf(req.params.book);
-  const chapterIndex = books[bookIndex].indexOf(req.params.chapter);
+  const chapterIndex = parseInt(req.params.chapter) - 1;
   const verseIndex = randomIndex(
     data.books[bookIndex].chapters[chapterIndex].verses
   );
-  res.json({
-    ref: data.books[bookIndex].chapters[chapterIndex].verses[verseIndex],
-  });
-});
-
-app.get("/:book", (req, res) => {
-  res.json({
-    ref: data.books[books.indexOf(req.params.book)],
-  });
-});
-
-app.get("/:book/:chapter", (req, res) => {
-  res.json({
-    ref: data.books[books.indexOf(req.params.book)].chapters[
-      parseInt(req.params.chapter) - 1
-    ],
-  });
+  res.json(data.books[bookIndex].chapters[chapterIndex].verses[verseIndex]);
 });
 
 app.get("/:book/:chapter/:verse", (req, res) => {
-  res.json({
-    ref: data.books[books.indexOf(req.params.book)].chapters[
+  res.json(
+    data.books[books.indexOf(req.params.book)].chapters[
       parseInt(req.params.chapter) - 1
-    ].verses[parseInt(req.params.verse) - 1],
-  });
+    ].verses[parseInt(req.params.verse) - 1]
+  );
 });
 
 app.listen(PORT, () => {
