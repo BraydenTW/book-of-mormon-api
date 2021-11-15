@@ -25,6 +25,12 @@ const books = [
   "moroni",
 ];
 
+app.get("/", (req, res) =>
+  res.json({
+    message: "Welcome to the ultimate Book of Mormon API! Instructions are here: https://github.com/BraydenTW/book-of-mormon-api/",
+  })
+);
+
 app.get("/random", (req, res) => {
   const bookIndex = randomIndex(data.books);
   const chapterIndex = randomIndex(data.books[bookIndex].chapters);
